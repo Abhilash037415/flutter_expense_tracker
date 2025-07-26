@@ -1,5 +1,6 @@
 import 'package:expense_tracker/widgets/expenses_list/expenses.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
@@ -32,31 +33,26 @@ class _ExpensesState extends State<Expenses> {
       context: context,
       builder: (ctx) => Container(
         padding: const EdgeInsets.all(16),
-        child: const Text('Modal bottom overlay'),
+        child: const NewExpense(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Expense Tracker'),
-          actions: [
-            IconButton(
-              onPressed: _openAddExpenseOverlay,
-              icon: Icon(Icons.add),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Text('Welcome text'),
-            Text('Graph goes here'),
-            Expanded(child: ExpensesList(expenses: _registeredExpenses)),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Expense Tracker'),
+        actions: [
+          IconButton(onPressed: _openAddExpenseOverlay, icon: Icon(Icons.add)),
+        ],
+      ),
+      body: Column(
+        children: [
+          Text('Welcome text'),
+          Text('Graph goes here'),
+          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+        ],
       ),
     );
   }
