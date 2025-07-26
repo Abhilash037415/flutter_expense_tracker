@@ -10,10 +10,27 @@ class NewExpense extends StatefulWidget {
 
 class _NewExpenseState extends State<NewExpense> {
   final _textController = TextEditingController();
+  final _autocontroller = TextEditingController();
+
+  void presentDatePicker() {
+    final currentDate = DateTime.now();
+    final firstDate = DateTime(
+      currentDate.year - 1,
+      currentDate.month,
+      currentDate.day,
+    );
+    showDatePicker(
+      context: context,
+      initialDate: currentDate,
+      firstDate: firstDate,
+      lastDate: currentDate,
+    );
+  }
 
   @override
   void dispose() {
     _textController.dispose();
+    _autocontroller.dispose();
     super.dispose();
   }
 
@@ -31,8 +48,40 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           Row(
             children: [
+              Expanded(
+                child: TextField(
+                  controller: _autocontroller,
+                  maxLength: 50,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(label: Text('\$')),
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Select Date'),
+                    IconButton(
+                      onPressed: presentDatePicker,
+                      icon: Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancel'),
+              ),
               ElevatedButton(
                 onPressed: () {
+                  print(_autocontroller.text);
                   print(_textController.text);
                 },
                 child: Text('Save Expense'),
