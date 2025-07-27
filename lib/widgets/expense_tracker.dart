@@ -1,5 +1,5 @@
-import 'package:expense_tracker/widgets/expenses_list/expenses.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/expenses_list/expenses.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +13,12 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+  void addExpense(Expense newExpense) {
+    setState(() {
+      _registeredExpenses.add(newExpense);
+    });
+  }
+
   final List<Expense> _registeredExpenses = [
     Expense(
       title: 'Flutter',
@@ -33,7 +39,7 @@ class _ExpensesState extends State<Expenses> {
       context: context,
       builder: (ctx) => Container(
         padding: const EdgeInsets.all(16),
-        child: const NewExpense(),
+        child: NewExpense(addExpense: addExpense),
       ),
     );
   }
