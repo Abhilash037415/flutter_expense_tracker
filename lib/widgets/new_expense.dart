@@ -197,20 +197,43 @@ class _NewExpenseState extends State<NewExpense> {
               ],
             ),
           ),
+          const SizedBox(height: 20,),
           Row(
             children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancel'),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.deepPurple,
+                    side: const BorderSide(color: Colors.deepPurple),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Cancel'),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _submitExpenseData();
-                  Navigator.pop(context);
-                },
-                child: Text('Save Expense'),
+              const SizedBox(width: 16), 
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _submitExpenseData();
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    elevation: 3,
+                  ),
+                  child: const Text('Save Expense'),
+                ),
               ),
             ],
           ),
