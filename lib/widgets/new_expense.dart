@@ -91,60 +91,114 @@ class _NewExpenseState extends State<NewExpense> {
             controller: _textController,
             maxLength: 50,
             keyboardType: TextInputType.name,
-            decoration: InputDecoration(label: Text('Title')),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountcontroller,
-                  maxLength: 50,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(label: Text('\$')),
-                ),
+            decoration: InputDecoration(
+              label: Text('Title'),
+              filled: true,
+              fillColor: Color.fromARGB(255, 242, 223, 249), // pale green-ish
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.black),
               ),
-              SizedBox(width: 16),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      _pickedDate == null
-                          ? 'No date Selected'
-                          : formatter.format(_pickedDate!),
-                      textAlign: TextAlign.center,
-                    ),
-                    IconButton(
-                      onPressed: presentDatePicker,
-                      icon: Icon(Icons.calendar_month),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-          Row(
-            children: [
-              DropdownButton(
-                value: _selectedCategory,
-                items: Category.values
-                    .map(
-                      (category) => DropdownMenuItem(
-                        value: category,
-                        child: Text(category.name.toUpperCase()),
+          TextField(
+            controller: _amountcontroller,
+            maxLength: 50,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              label: Text('₹'),
+              filled: true,
+              fillColor: Color.fromARGB(255, 242, 223, 249), // pale green-ish
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.black),
+              ),
+            ),
+          ),
+          SizedBox(width: 16),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF2DFF9),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.deepPurple.shade100),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          _pickedDate == null
+                              ? 'No date Selected'
+                              : formatter.format(_pickedDate!),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: _pickedDate == null
+                                ? const Color.fromARGB(255, 110, 110, 110)
+                                : Colors.deepPurple,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    if (value == null) {
-                      return;
-                    }
-                    _selectedCategory = value;
-                  });
-                },
-              ),
-              Spacer(),
+                      IconButton(
+                        onPressed: presentDatePicker,
+                        icon: Icon(Icons.calendar_month, size: 26),
+                        color: Colors.deepPurple,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(width: 12),
+
+                Expanded(
+                  flex: 1,
+                  child: DropdownButtonFormField<Category>(
+                    value: _selectedCategory,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 12,
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    icon: const Icon(Icons.arrow_drop_down, size: 26),
+                    items: Category.values
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(
+                              category.name.toUpperCase(),
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          _selectedCategory = value;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            children: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);

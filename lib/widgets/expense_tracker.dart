@@ -39,7 +39,7 @@ class _ExpensesState extends State<Expenses> {
       context: context,
       isScrollControlled: true,
       builder: (ctx) => Container(
-        padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
+        padding: const EdgeInsets.fromLTRB(16, 70, 16, 16),
         child: NewExpense(addExpense: addExpense),
       ),
     );
