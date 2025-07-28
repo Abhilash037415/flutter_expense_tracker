@@ -19,6 +19,12 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
+  void removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+  }
+
   final List<Expense> _registeredExpenses = [
     Expense(
       title: 'Flutter',
@@ -58,7 +64,12 @@ class _ExpensesState extends State<Expenses> {
         children: [
           Text('Welcome text'),
           Text('Graph goes here'),
-          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+          Expanded(
+            child: ExpensesList(
+              expenses: _registeredExpenses,
+              onRemoveExpense: removeExpense,
+            ),
+          ),
         ],
       ),
     );

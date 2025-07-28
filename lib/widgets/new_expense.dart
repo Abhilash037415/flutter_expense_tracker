@@ -197,7 +197,7 @@ class _NewExpenseState extends State<NewExpense> {
               ],
             ),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -216,7 +216,7 @@ class _NewExpenseState extends State<NewExpense> {
                   child: const Text('Cancel'),
                 ),
               ),
-              const SizedBox(width: 16), 
+              const SizedBox(width: 16),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
