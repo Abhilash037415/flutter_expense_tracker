@@ -48,7 +48,6 @@ class _NewExpenseState extends State<NewExpense> {
     if (_textController.text.trim().isEmpty ||
         amountIsValid ||
         _pickedDate == null) {
-      //error message
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -94,7 +93,7 @@ class _NewExpenseState extends State<NewExpense> {
             decoration: InputDecoration(
               label: Text('Title'),
               filled: true,
-              fillColor: Color.fromARGB(255, 242, 223, 249), // pale green-ish
+              fillColor: Color.fromARGB(255, 242, 223, 249),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: Colors.black),
@@ -108,7 +107,7 @@ class _NewExpenseState extends State<NewExpense> {
             decoration: InputDecoration(
               label: Text('₹'),
               filled: true,
-              fillColor: Color.fromARGB(255, 242, 223, 249), // pale green-ish
+              fillColor: Color.fromARGB(255, 242, 223, 249),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: Colors.black),
